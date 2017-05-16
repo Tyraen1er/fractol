@@ -6,12 +6,12 @@
 #    By: eferrand <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/01/23 22:43:33 by eferrand          #+#    #+#              #
-#    Updated: 2017/05/16 06:25:21 by eferrand         ###   ########.fr        #
+#    Updated: 2017/05/16 07:03:20 by eferrand         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # our executable name
-NAME			:=	fdf
+NAME			:=	fractol
 
 # base dirs
 SRC_DIR			:=	./src

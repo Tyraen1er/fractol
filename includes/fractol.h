@@ -1,5 +1,5 @@
-#ifndef LIBFT_H
-# define LIBFT_H
+#ifndef FRACTOL_H
+# define FRACTOL_H
 # include "libft.h"
 # include "mlx.h"
 
