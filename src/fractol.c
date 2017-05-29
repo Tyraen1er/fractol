@@ -1,5 +1,29 @@
 #include "fractol.h"
 
+void	mandelbrot(int x, int y)
+{
+	int	a;
+	int	c;
+	int	evol;
+
+	a = 0;
+	c = x + (i * y);
+	evol = 0;
+	while (++a < 100 && evol < 2)
+	{
+		evol = pow(evol, 2) + c;
+		++i;
+	}
+	return (i);
+}
+
+ft_colorpoint()
+{
+	static int	fractal = 0;
+
+
+}
+
 int		ft_display(int fractol)
 {
 	void	**mlx[4];
