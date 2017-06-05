@@ -6,7 +6,7 @@
 /*   By: eferrand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/29 23:23:07 by eferrand          #+#    #+#             */
-/*   Updated: 2017/06/05 02:06:07 by eferrand         ###   ########.fr       */
+/*   Updated: 2017/06/05 02:19:15 by eferrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -204,8 +204,8 @@ int		mouse_event(int x, int y, void *mlx)
 		return (0);
 	if ((0 < x && x < 1000) && (0 < y && y < 1000))
 	{
-		cri[0] = ((double)x / 700)  - 0.9;
-		cri[1] = ((double)y / 700) - 0.9;
+		cri[0] = ((double)x / 416)  - 1.8;
+		cri[1] = ((double)y / 555) - 0.8;
 	}
 	dis_screen(0, (void**)mlx, NULL, cri);
 	return (0);
