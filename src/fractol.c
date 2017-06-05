@@ -6,44 +6,32 @@
 /*   By: eferrand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/29 23:23:07 by eferrand          #+#    #+#             */
-/*   Updated: 2017/06/02 02:27:54 by eferrand         ###   ########.fr       */
+/*   Updated: 2017/06/05 02:06:07 by eferrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int		julia(int x, int y, double *coord)
+
+int		julia(double x, double y, double *c)
 {
-	double	a;
-	double	zr;
-	double	zi;
+	int		a;
 	double	tmp;
 
-	(void)coord;
-	a = 0;
-	zr = 0;
-	zi = 0;
-	while (++a < 100 && zr * zr + zi* zi < 4)
+	a = -1;
+	while (++a < 100 && x * x + y * y < 4)
 	{
-		tmp = zr;
-		zr = (zr * zr) - (zi * zi) + x;
-		zi = (2 * zi * tmp) + y; 
+		tmp = x;
+		x = (x * x) - (y * y) + c[0];
+		y = (2 * y * tmp) + c[1]; 
 		++a;
 	}
 	return (a);
 }
 
-int		perso(int x, int y, double *coord)
-{
-	(void)x;
-	(void)y;
-	(void)coord;
-	return (0);
-}
-
 int		mandelbrot(double x, double y)
 {
-	double	a;
+	int		a;
 	double	zr;
 	double	zi;
 	double	tmp;
@@ -61,47 +49,99 @@ int		mandelbrot(double x, double y)
 	return (a);
 }
 
+/*
+int		perso(double x, double y)
+{
+	int		a;
+	double	zr;
+	double	zi;
+	double	tmp;
+
+	a = 0;
+	zr = 0;
+	zi = 0;
+	while (++a < 100 && zr * zr + zi* zi < 4)
+	{
+		tmp = zr;
+		zr = zr * zr * zr - 3 * zr * zi * zi + x;
+		zi = 3 * tmp * tmp * zi - 3 * zi  + y; 
+		++a;
+	}
+	return (a);
+}
+*/
+
+
+int		perso(double x, double y) 
+{
+	int		a;
+	double	zr;
+	double	zi;
+	double	tmp;
+
+	a = 0;
+	zr = 0;
+	zi = 0;
+	while (++a < 100 && zr * zr + zi* zi < 4)
+	{
+		tmp = zr;
+		zr = fabs(zr * zr - zi * zi) + x;
+		zi = fabs(2 * zi * tmp) + y; 
+		++a;
+	}
+	return (a);
+}
+
+
 int		ft_colorpoint(int i)
 {
+/*
+**	i = i / 9;
+**	if (i < 3)i
+**	sin()
+*/
 	if (i < 40)
-		return (0xFF0000);
+		return (0xFF); 
 	if (i < 80)
-		return (0xFFD700);
+		return (0xFF00);
 	if (i < 100)
-		return (0x4169E1);
+		return (0xFF0000);
 	return (0xFFFFFF);
 }
 
 
 /*
- ** coord[0] = x1 || coord[1] = x2 || coord[2] == y1 || coord[3] = y2
- */
+** coord[0] = x1 || coord[1] = x2 || coord[2] == y1 || coord[3] = y2
+*/
 
-void	dis_screen(int f, void **mlx, double *coord)
+void	dis_screen(int fractal, void **mlx, double *coord, double *cri)
 {
-	double	x;
-	double	y;
-	double	zoomx;
-	double	zoomy;
-
-	zoomx = 1000 / (coord[1] - coord[0]);
-	zoomy = 1000 / (coord[3] - coord[2]);
+	double			x;
+	double			y;
+	static double	*coo = NULL;
+	static double	c[2] = {0.285F, 0.01F};
+	static int		f = 0;
+	
 	y = -1;
+	coo = (coord) ? coord : coo;
+	f = (fractal) ? fractal : f;
+	if (cri && ((c[0] = cri[0]) || 1))
+		c[1] = cri[1];
 	while (++y < 1000 && (x = -1))
 		while (++x < 1000)
 		{
 			if (f == 1)
-				((int*)mlx[3])[(int)(x + y * 1000)] =
-					ft_colorpoint(julia(x / zoomx + coord[0], 
-								y / zoomy + coord[1], coord));
+				((int*)mlx[3])[(int)(x + y * 1000)] = ft_colorpoint(julia(
+						coo[0] + (coo[1] - coo[0] / 1000 * x),
+						coo[2] + (coo[3] - coo[2]) / 1000 * y, c));
 			if (f == 2)
-				((int*)mlx[3])[(int)(x + y * 1000)] =
-					ft_colorpoint(mandelbrot(x / zoomx + coord[0],
-								y / zoomx + coord[1]));
+				((int*)mlx[3])[(int)(x + y * 1000)] = ft_colorpoint(mandelbrot(
+						coo[0] + (coo[1] - coo[0] / 1000 * x),
+						coo[2] + (coo[3] - coo[2]) / 1000 * y));
 			if (f == 3)
-				((int*)mlx[3])[(int)(x + y * 1000)] =
-					ft_colorpoint(perso(x / zoomx + coord[0],
-								y / zoomy + coord[1], coord));
+				((int*)mlx[3])[(int)(x + y * 1000)] = ft_colorpoint(perso(
+						coo[0] + (coo[1] - coo[0] / 1000 * x),
+						coo[2] + (coo[3] - coo[2]) / 1000 * y));
 		}
 	mlx_put_image_to_window(mlx[0], mlx[1], mlx[2], 0, 0);
 }
@@ -109,61 +149,66 @@ void	dis_screen(int f, void **mlx, double *coord)
 //	z[0] = '+' || '-'
 //	z[1] = x de la pos souris
 //	z[2] = y de la pos souris
+//	coord[0] = dimension largeur et limite gauche
+//	coord[1] = limite droite
+//	coord[2] = dimension limite haute ?
+//	coord[3] = limite basse
 
-void	init(int fractal, int *z, void **mlx)
+
+void	init(int fractal, double *z, void **mlx)
 {
 	static int		f = 0;
-	static double	*coord;
+	static double	coord[4];
 
-	if (fractal)
+	if ((f = (fractal) ? fractal : f) == 1)
 	{
-		if ((f = fractal) == 1)
-		{
-			coord = (double[8]){-1, 1, -1.2F, 1.2F};
-			if (z)
-				z += (z[0] == '+') ? 10 : -10;
-		}
-		else if (f == 2)
-		{
-			coord = (double[8]){-2.1F, 0.6F, -1.2F, 1.2F};
-			if (z)
-				z += (z[0] == '+') ? 10 : -10;
-		}
-		else if (f == 3)
-		{
-			coord = (double[8]){-2.1F, 0.6F, -1.2F, 1.2F};
-			if (z)
-				z += (z[0] == '+') ? 10 : -10;
-		}
+		coord[0] = (z) ? -2.5F : -2.5F;
+		coord[1] = (z) ? 1.2F : 1.2F;
+		coord[2] = (z) ? -1.2F : -1.2F;
+		coord[3] = (z) ? 1.2F : 1.2F;
 	}
-	dis_screen(f, mlx, coord);
+	else if (f == 2)
+	{
+		coord[0] = (z) ? -2.5F : -2.5F;
+		coord[1] = (z) ? 0.5F : 0.5F;
+		coord[2] = (z) ? -1.2F : -1.2F;
+		coord[3] = (z) ? 1.2F : 1.2F;
+	}
+	else if (f == 3)
+	{
+		coord[0] = (z) ? -2.5F : -2.5F;
+		coord[1] = (z) ? 0.4F : 0.4F;
+		coord[2] = (z) ? -1.8F : -1.8F;
+		coord[3] = (z) ? 0.6F : 0.6F;
+	}
+	dis_screen(f, mlx, coord, NULL);
 }
 
-int		my_key_fct(int keycode, void *ptr)
+int		my_key_fct(int keycode, void *mlx)
 {
-	(void)ptr;
 	if (keycode == 53)
 		exit(3);
+	if (keycode == 36)
+		mouse_event(-3000, 0, mlx);
 	return (0);
 }
 
 int		mouse_event(int x, int y, void *mlx)
 {
-	static int oldx = 0;
-	static int oldy = 0;
+	static int		on = 1;
+	static double	cri[2] = {-0.9, -0.9};
 
-	(void)mlx;
-	oldx = x;
-	oldy = y;
-	//	julia(x - oldx);
-	/*	ft_putstr("x : ");
-		ft_putnbr(x);
-		write(1, "\n", 1);
-		ft_putstr("y : ");
-		ft_putnbr(y);
-		write(1, "\n", 1);
-		write(1, "\n", 1);
-		*/	return (0);
+	if (x == -3000)
+		on = -on;
+	if (on == -1 || x == -3000)
+		return (0);
+	if ((0 < x && x < 1000) && (0 < y && y < 1000))
+	{
+		cri[0] = ((double)x / 700)  - 0.9;
+		cri[1] = ((double)y / 700) - 0.9;
+	}
+	dis_screen(0, (void**)mlx, NULL, cri);
+	return (0);
 }
 
 // bouton 4 = dezoom
@@ -171,16 +216,17 @@ int		mouse_event(int x, int y, void *mlx)
 
 int		scroll(int button, int x, int y, void *mlx)
 {
-	int		*zoom;
+	static double	*zoom;
 
 	(void)mlx;
 	zoom = NULL;
-	if (button == 4 || button == 5)
+	if ((button == 4 || button == 5) && 0 < x && x < 1000 && 0 < y && y < 1000)
 	{
-		zoom = (int[3]){0};
-		zoom[0] = (button == 4) ? '-' : '+';
-		zoom[1] = x;
-		zoom[2] = y;
+		zoom = (double[4]){1, 1, 1, 1};
+//		zoom[0] = (button == 4) ? '-' : '+';
+//		zoom[1] = (button == 4) ? ;
+//		zoom[2] = (button == 4) ? ;
+//		zoom[3] = (button == 4) ? 
 	}
 	init(0, zoom, mlx);
 	return (0);
@@ -188,10 +234,10 @@ int		scroll(int button, int x, int y, void *mlx)
 
 int		ft_display(int fractal)
 {
-	void	*mlx[4];
-	int		bpp = 0;
-	int		s_l = 0;
-	int		endian = 0;
+	void			*mlx[4];
+	int				bpp = 0;
+	int				s_l = 0;
+	int				endian = 0;
 
 	(void)fractal;
 	if (!(mlx[0] = mlx_init()) ||
@@ -212,7 +258,7 @@ int		main(int ac, char**av)
 	if (ac != 2)
 	{
 		ft_putstr("usage: ./fractal [Julia / Mandelbrot / Perso]\n");
-		return (0);
+	return (0);
 	}
 	else
 	{

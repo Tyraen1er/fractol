@@ -5,11 +5,16 @@
 # include <math.h>
 # include </opt/X11/include/X11/X.h>
 
-int		mandelbrot(double x, double y);
-int		ft_colorpoint(int i);
-void	dis_screen(int f, void **mlx, double *coord);
-void	init(int fractal, int *z, void **mlx);
-int		my_key_fct(int keycode, void *all);
-int		ft_display(int fractol);
+int		scroll(int, int, int, void*);
+int		my_key_fct(int, void*);
+int		mouse_event(int, int, void*);
+int		julia(double, double, double*);
+int		mandelbrot(double, double);
+int		perso(double, double);
+int		ft_colorpoint(int);
+void	dis_screen(int, void**, double*, double*);
+void	init(int, double*, void**);
+int		my_key_fct(int, void*);
+int		ft_display(int);
 
 #endif
