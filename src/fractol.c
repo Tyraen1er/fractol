@@ -6,7 +6,7 @@
 /*   By: eferrand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/29 23:23:07 by eferrand          #+#    #+#             */
-/*   Updated: 2017/06/05 02:19:15 by eferrand         ###   ########.fr       */
+/*   Updated: 2017/06/05 02:43:41 by eferrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,17 +95,30 @@ int		perso(double x, double y)
 
 int		ft_colorpoint(int i)
 {
-/*
-**	i = i / 9;
-**	if (i < 3)i
-**	sin()
-*/
-	if (i < 40)
-		return (0xFF); 
-	if (i < 80)
-		return (0xFF00);
+	if (i < 8)
+		return (0);
+	if (i < 16)
+		return (0x330099);
+	if (i < 24)
+		return (0x333399);
+	if (i < 33)
+		return (0x339999);
+	if (i < 41)
+		return (0x33CC99);
+	if (i < 49)
+		return (0x33FF99);
+	if (i < 57)
+		return (0x33FFCC);
+	if (i < 66)
+		return (0x33FFFF);
+	if (i < 74)
+		return (0x66FFFF);
+	if (i < 82)
+		return (0x99FFFF);
+	if (i < 90)
+		return (0xCCFFFF);
 	if (i < 100)
-		return (0xFF0000);
+		return (0xDDDDDD);
 	return (0xFFFFFF);
 }
 
