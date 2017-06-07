@@ -6,7 +6,7 @@
 /*   By: eferrand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/22 22:21:24 by eferrand          #+#    #+#             */
-/*   Updated: 2017/01/31 22:01:44 by eferrand         ###   ########.fr       */
+/*   Updated: 2017/06/05 21:50:43 by eferrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,18 @@ typedef struct		s_btree
 	struct s_btree	*right;
 	void			*item;
 }					t_btree;
+
+typedef struct		s_point
+{
+	double			x;
+	double			y;
+}					t_point;
+
+typedef struct		s_quad
+{
+	t_point			tl;
+	t_point			br;
+}					t_quad;
 
 void				*ft_memset(void *b, int c, size_t len);
 void				ft_bzero(void *s, size_t n);
@@ -69,30 +81,35 @@ void				ft_memdel(void **ap);
 char				*ft_strnew(size_t size);
 void				ft_strdel(char **as);
 void				ft_strclr(char *s);
-void				ft_striter(char *s, void (*f)(char*));
-void				ft_striteri(char *s, void (*f)(unsigned int, char *));
-char				*ft_strmap(char const *s, char (*f)(char));
-char				*ft_strmapi(char const *s, char (*f)(unsigned int, char));
-int					ft_strequ(char const *s1, char const *s2);
-int					ft_strnequ(char const *s1, char const *s2, size_t n);
-char				*ft_strsub(char const *s, unsigned int start, size_t len);
-char				*ft_strjoin(char const *s1, char const *s2);
-char				*ft_strtrim(char const *s);
-char				**ft_strsplit(char const *s, char c);
-char				*ft_itoa(int n);
-void				ft_putchar(char c);
-void				ft_putstr(char const *s);
-void				ft_putendl(char const *s);
-void				ft_putnbr(int n);
-void				ft_putchar_fd(char c, int fd);
-void				ft_putstr_fd(char const *s, int fd);
-void				ft_putendl_fd(char const *s, int fd);
-void				ft_putnbr_fd(int n, int fd);
-t_list				*ft_lstnew(void const *content, size_t content_size);
-void				ft_lstdelone(t_list **alst, void (*del)(void*, size_t));
-void				ft_lstdel(t_list **alst, void (*del)(void*, size_t));
-void				ft_lstadd(t_list **alst, t_list *new);
+void				ft_striter(char*, void (*f)(char*));
+void				ft_striteri(char*, void (*f)(unsigned int, char *));
+char				*ft_strmap(char const*, char (*f)(char));
+char				*ft_strmapi(char const*, char (*f)(unsigned int, char));
+int					ft_strequ(char const*, char const*);
+int					ft_strnequ(char const*, char const*, size_t);
+char				*ft_strsub(char const*, unsigned int, size_t);
+char				*ft_strjoin(char const*, char const*);
+char				*ft_strtrim(char const*);
+char				**ft_strsplit(char const*, char);
+char				*ft_itoa(int);
+void				ft_putchar(char);
+void				ft_putstr(char const*);
+void				ft_putendl(char const*);
+void				ft_putnbr(int);
+void				ft_putchar_fd(char, int);
+void				ft_putstr_fd(char const*, int);
+void				ft_putendl_fd(char const*, int);
+void				ft_putnbr_fd(int, int);
+t_list				*ft_lstnew(void const*, size_t);
+void				ft_lstdelone(t_list**, void (*del)(void*, size_t));
+void				ft_lstdel(t_list**, void (*del)(void*, size_t));
+void				ft_lstadd(t_list**, t_list*);
 void				ft_lstiter(t_list *lst, void (*f)(t_list *elem));
-t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
+t_list				*ft_lstmap(t_list*, t_list *(*f)(t_list *elem));
+int					ft_isletter(char);
+t_point				ft_point_in_quad_to_ratio(t_quad, t_point);
+t_point				ft_point_ratio_to_quad(t_point, t_quad);
+t_quad				ft_create_quad(t_point, t_point);
+t_point				ft_point_change_quad(t_point, t_quad, t_quad);
 
 #endif

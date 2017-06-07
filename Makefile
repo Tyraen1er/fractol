@@ -6,7 +6,7 @@
 #    By: eferrand <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/01/23 22:43:33 by eferrand          #+#    #+#              #
-#    Updated: 2017/06/03 00:41:00 by eferrand         ###   ########.fr        #
+#    Updated: 2017/06/07 07:15:26 by eferrand         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,9 @@ LIB_DIR			:=	./libs
 OBJ_DIR			:=	./obj
 
 # files to compile
-FILE_LIST		:= fractol.c
+FILE_LIST		:=	fractol.c	\
+					display.c	\
+					change_quad.c
 
 OBJ_FILES		:= $(addprefix $(OBJ_DIR)/,$(FILE_LIST:.c=.o))
 

@@ -6,7 +6,7 @@
 #    By: eferrand <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/18 22:08:18 by eferrand          #+#    #+#              #
-#    Updated: 2017/01/31 22:02:12 by eferrand         ###   ########.fr        #
+#    Updated: 2017/06/05 21:52:49 by eferrand         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -76,7 +76,12 @@ FILE_LIST	:=	ft_memset.c		\
 				ft_lstmap.c		\
 				ft_realloc.c	\
 				ft_power.c		\
-				ft_root.c
+				ft_root.c		\
+				ft_isletter.c	\
+				ft_point_in_quad_to_ratio.c	\
+				ft_point_ratio_to_quad.c	\
+				ft_create_quad.c			\
+				ft_point_change_quad.c
 
 OBJ_FILES	:=	$(addprefix $(OBJ_DIR)/,$(FILE_LIST:.c=.o))
 INCLUDES	:=	-I $(INC_DIR)

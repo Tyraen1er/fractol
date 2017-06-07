@@ -8,18 +8,8 @@
 # define ESCAPE 53
 # define ENTER 36
 
-typedef struct	s_point
-{
-	double		x;
-	double		y;
-}				t_point;
-
-typedef struct	s_quad
-{
-	t_point		tl;
-	t_point		br;
-}				t_quad;
-
+t_quad	ft_zoom_apply(t_quad, int *z);
+t_quad	ft_move_apply(t_quad, int *z);
 int		scroll(int, int, int, void**);
 int		mouse_event(int, int, void**);
 int		my_key_fct(int, void**);
@@ -30,7 +20,5 @@ int		ft_colorpoint(int);
 void	dis_screen(int, void**, t_quad*, t_point*);
 void	init(int, int*, void**);
 int		ft_display(int);
-t_point	ft_point_in_quad_to_ratio(t_quad, t_point);
-t_point	ft_point_ratio_to_quad(t_point, t_quad);
 
 #endif
