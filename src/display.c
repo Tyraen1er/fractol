@@ -6,7 +6,7 @@
 /*   By: eferrand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/07 06:49:50 by eferrand          #+#    #+#             */
-/*   Updated: 2017/06/13 06:53:19 by eferrand         ###   ########.fr       */
+/*   Updated: 2017/06/14 05:44:02 by eferrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	dis_screen(int fractal, void **mlx, t_quad coord, t_point cst)
 	static t_quad	coo = {.tl = {0, 0}, .br = {0, 0}};
 	static t_point	c = {0, 0};
 	static int		f = 0;
-	static int		(*func[3])(t_point, t_point) = {julia, mandelbrot, perso};
+	static int		(*func[3])(t_point, t_point) = {julia, mandelbrot, b_ship};
 
 	if (coord.tl.x != 0 && coord.tl.y != 0 && coord.br.x != 0 &&
 			coord.br.y != 0)

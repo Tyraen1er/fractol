@@ -6,7 +6,7 @@
 /*   By: eferrand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/11 08:36:27 by eferrand          #+#    #+#             */
-/*   Updated: 2017/06/11 08:36:45 by eferrand         ###   ########.fr       */
+/*   Updated: 2017/06/14 05:44:11 by eferrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ int		mouse_event(int, int, void**);
 int		my_key_fct(int, void**);
 int		julia(t_point, t_point);
 int		mandelbrot(t_point, t_point);
-int		perso(t_point, t_point);
+int		newton(t_point, t_point);
+int		b_ship(t_point, t_point);
 int		ft_colorpoint(int);
 void	dis_screen(int, void**, t_quad, t_point);
 void	init(int, int*, void**);

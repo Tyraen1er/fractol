@@ -6,7 +6,7 @@
 /*   By: eferrand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/29 23:23:07 by eferrand          #+#    #+#             */
-/*   Updated: 2017/06/13 06:54:03 by eferrand         ###   ########.fr       */
+/*   Updated: 2017/06/14 05:46:15 by eferrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,17 +38,17 @@ int		mandelbrot(t_point z, t_point c)
 	a = 0;
 	zr = 0;
 	zi = 0;
-	(void)z;
+	(void)c;
 	while (++a < 100 && zr * zr + zi * zi < 4)
 	{
 		tmp = zr;
-		zr = zr * zr - zi * zi + c.x;
-		zi = 2 * zi * tmp + c.y;
+		zr = zr * zr - zi * zi + z.x;
+		zi = 2 * zi * tmp + z.y;
 	}
 	return (a);
 }
 
-int		perso(t_point z, t_point c)
+int		b_ship(t_point z, t_point c)
 {
 	int		a;
 	double	zr;
@@ -58,30 +58,48 @@ int		perso(t_point z, t_point c)
 	a = 0;
 	zr = 0;
 	zi = 0;
-	(void)z;
+	(void)c;
 	while (++a < 100 && zr * zr + zi * zi < 4)
 	{
 		tmp = zr;
-		zr = fabs(zr * zr - zi * zi) + c.x;
-		zi = fabs(2 * zi * tmp) + c.y;
+		zr = fabs(zr * zr - zi * zi) + z.x;
+		zi = fabs(2 * zi * tmp) + z.y;
 	}
 	return (a);
 }
+
+/*
+**	int		newton(t_point z, t_point c)
+**	{
+**		int		a;
+**		double	tmp;
+**
+**		a = 0;
+**		(void)c;
+**		while (++a < 100 && z.x * z.x + z.y * z.y < 4)
+**		{
+**			tmp = z.x;
+**			z.x = (2 * (pow(z.x, 3) - 3 * z.x * z.y * z.y) + 1) /
+**				(3 * (z.x * z.x - z.y * z.y));
+**			z.y = (2 * (3 * tmp * tmp * z.y - pow(z.y, 3))) / (6 * tmp * z.y);
+**		}
+**		return (a);
+**	}
+*/
 
 void	init(int fractal, int *z, void **mlx)
 {
 	static int		f = -1;
 	static t_quad	frac;
 
-	(void)z;
 	if (f == -1 || (z && z[0] == 0 && z[1] == 0 && z[2] == 0))
 	{
 		if ((f = fractal) == 0)
 			frac = (t_quad){.tl = {-1.7, -1.5}, .br = {1.7, 1.7}};
 		else if (f == 1)
-			frac = (t_quad){.tl = {-2.1, -1.2}, .br = {1.2, 0.6}};
+			frac = (t_quad){.tl = {-2.1, -1.2}, .br = {1.2, 1.6}};
 		else if (f == 2)
-			frac = (t_quad){.tl = {-2.5, 1.8}, .br = {-0.4, 0.6}};
+			frac = (t_quad){.tl = {-2.5, -1.8}, .br = {1.4, 0.6}};
 	}
 	if (z && z[0])
 		frac = ft_zoom_apply(frac, z);
