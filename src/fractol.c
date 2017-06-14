@@ -6,7 +6,7 @@
 /*   By: eferrand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/29 23:23:07 by eferrand          #+#    #+#             */
-/*   Updated: 2017/06/14 05:46:15 by eferrand         ###   ########.fr       */
+/*   Updated: 2017/06/15 01:24:21 by eferrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,10 @@ int		main(int ac, char **av)
 		else if (!ft_strcmp(av[1], "Perso"))
 			ft_display(2);
 		else
+		{
 			ft_putstr("Cette fractal n est pas enregistrée.\n");
+			ft_putstr("usage: ./fractal [Julia / Mandelbrot / Perso]\n");
+		}
 	}
 	return (0);
 }

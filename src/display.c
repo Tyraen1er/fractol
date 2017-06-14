@@ -6,7 +6,7 @@
 /*   By: eferrand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/07 06:49:50 by eferrand          #+#    #+#             */
-/*   Updated: 2017/06/14 05:44:02 by eferrand         ###   ########.fr       */
+/*   Updated: 2017/06/15 01:13:19 by eferrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int		ft_display(int fractal)
 	init(fractal, NULL, mlx);
 	mlx_key_hook(mlx[1], my_key_fct, mlx);
 	mlx_mouse_hook(mlx[1], scroll, mlx);
-	mlx_hook(mlx[1], MotionNotify, PointerMotionMask, mouse_event, mlx);
+	mlx_hook(mlx[1], MOTIONNOTIFY, POINTERMOTIONMASK, mouse_event, mlx);
 	mlx_loop(mlx[0]);
 	return (0);
 }

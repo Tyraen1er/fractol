@@ -6,7 +6,7 @@
 /*   By: eferrand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/22 22:21:24 by eferrand          #+#    #+#             */
-/*   Updated: 2017/06/05 21:50:43 by eferrand         ###   ########.fr       */
+/*   Updated: 2017/06/15 01:14:19 by eferrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,35 +81,36 @@ void				ft_memdel(void **ap);
 char				*ft_strnew(size_t size);
 void				ft_strdel(char **as);
 void				ft_strclr(char *s);
-void				ft_striter(char*, void (*f)(char*));
-void				ft_striteri(char*, void (*f)(unsigned int, char *));
-char				*ft_strmap(char const*, char (*f)(char));
-char				*ft_strmapi(char const*, char (*f)(unsigned int, char));
-int					ft_strequ(char const*, char const*);
-int					ft_strnequ(char const*, char const*, size_t);
-char				*ft_strsub(char const*, unsigned int, size_t);
-char				*ft_strjoin(char const*, char const*);
-char				*ft_strtrim(char const*);
-char				**ft_strsplit(char const*, char);
-char				*ft_itoa(int);
-void				ft_putchar(char);
-void				ft_putstr(char const*);
-void				ft_putendl(char const*);
-void				ft_putnbr(int);
-void				ft_putchar_fd(char, int);
-void				ft_putstr_fd(char const*, int);
-void				ft_putendl_fd(char const*, int);
-void				ft_putnbr_fd(int, int);
-t_list				*ft_lstnew(void const*, size_t);
-void				ft_lstdelone(t_list**, void (*del)(void*, size_t));
-void				ft_lstdel(t_list**, void (*del)(void*, size_t));
-void				ft_lstadd(t_list**, t_list*);
+void				ft_striter(char *a, void (*f)(char *b));
+void				ft_striteri(char *a, void (*f)(unsigned int b, char *c));
+char				*ft_strmap(char const *a, char (*f)(char b));
+char				*ft_strmapi(char const *a, char (*f)(unsigned int b,
+			char c));
+int					ft_strequ(char const *a, char const *b);
+int					ft_strnequ(char const *a, char const *b, size_t c);
+char				*ft_strsub(char const *a, unsigned int b, size_t c);
+char				*ft_strjoin(char const *a, char const *b);
+char				*ft_strtrim(char const *a);
+char				**ft_strsplit(char const *a, char b);
+char				*ft_itoa(int a);
+void				ft_putchar(char a);
+void				ft_putstr(char const *a);
+void				ft_putendl(char const *a);
+void				ft_putnbr(int a);
+void				ft_putchar_fd(char a, int b);
+void				ft_putstr_fd(char const *a, int b);
+void				ft_putendl_fd(char const *a, int b);
+void				ft_putnbr_fd(int a, int b);
+t_list				*ft_lstnew(void const *a, size_t b);
+void				ft_lstdelone(t_list **a, void (*del)(void *b, size_t c));
+void				ft_lstdel(t_list **a, void (*del)(void *b, size_t c));
+void				ft_lstadd(t_list **a, t_list *b);
 void				ft_lstiter(t_list *lst, void (*f)(t_list *elem));
-t_list				*ft_lstmap(t_list*, t_list *(*f)(t_list *elem));
-int					ft_isletter(char);
-t_point				ft_point_in_quad_to_ratio(t_quad, t_point);
-t_point				ft_point_ratio_to_quad(t_point, t_quad);
-t_quad				ft_create_quad(t_point, t_point);
-t_point				ft_point_change_quad(t_point, t_quad, t_quad);
+t_list				*ft_lstmap(t_list *a, t_list *(*f)(t_list *elem));
+int					ft_isletter(char a);
+t_point				ft_point_in_quad_to_ratio(t_quad a, t_point b);
+t_point				ft_point_ratio_to_quad(t_point a, t_quad b);
+t_quad				ft_create_quad(t_point a, t_point b);
+t_point				ft_point_change_quad(t_point a, t_quad b, t_quad c);
 
 #endif
