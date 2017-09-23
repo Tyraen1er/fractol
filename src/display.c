@@ -6,7 +6,7 @@
 /*   By: eferrand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/07 06:49:50 by eferrand          #+#    #+#             */
-/*   Updated: 2017/06/15 01:13:19 by eferrand         ###   ########.fr       */
+/*   Updated: 2017/09/23 20:53:32 by eferrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,37 @@ int		scroll(int button, int x, int y, void **mlx)
 	return (0);
 }
 
+/*
+**	void	dis_screen(int fractal, void **mlx, t_quad coord, t_point cst)
+**	{
+**		t_point			z;
+**		static t_quad	coo = {.tl = {0, 0}, .br = {0, 0}};
+**		static t_point	c = {0, 0};
+**		static int		f = 0;
+**		static int		(*func[3])(t_point, t_point) = {julia, mandelbrot, b_ship};
+**	
+**		if (coord.tl.x != 0 && coord.tl.y != 0 && coord.br.x != 0 &&
+**				coord.br.y != 0)
+**			coo = coord;
+**		if (cst.x != 5)
+**			c = cst;
+**		f = (fractal != -1) ? fractal : f;
+**		z.y = -1;
+**		while (++z.y < 1000 && (z.x = -1))
+**			while (++z.x < 1000)
+**			{
+**				((int*)(mlx[3]))[(int)(z.x + z.y * 1000)] = ft_colorpoint(
+**				func[f](ft_point_change_quad(z, (t_quad){{0, 0}, {1000, 1000}},
+**						coo), c));
+**			}
+**		mlx_put_image_to_window(mlx[0], mlx[1], mlx[2], 0, 0);
+**	}
+*/
+
 void	dis_screen(int fractal, void **mlx, t_quad coord, t_point cst)
 {
+	t_point			offset;
+	t_point			scale;
 	t_point			z;
 	static t_quad	coo = {.tl = {0, 0}, .br = {0, 0}};
 	static t_point	c = {0, 0};
@@ -76,13 +105,14 @@ void	dis_screen(int fractal, void **mlx, t_quad coord, t_point cst)
 	if (cst.x != 5)
 		c = cst;
 	f = (fractal != -1) ? fractal : f;
+	scale.x = ((offset = ft_point_change_quad((t_point){999, 999}, (t_quad){{0, 0}, {1000, 1000}}, coo)).x - ft_point_change_quad((t_point){0, 0}, (t_quad){{0, 0}, {1000, 1000}}, coo).x) / 1000;
+	scale.y = (ft_point_change_quad((t_point){999, 999}, (t_quad){{0, 0}, {1000, 1000}}, coo).y - ft_point_change_quad((t_point){0, 0}, (t_quad){{0, 0}, {1000, 1000}}, coo).y) / 1000;
 	z.y = -1;
 	while (++z.y < 1000 && (z.x = -1))
 		while (++z.x < 1000)
 		{
 			((int*)(mlx[3]))[(int)(z.x + z.y * 1000)] = ft_colorpoint(
-			func[f](ft_point_change_quad(z, (t_quad){{0, 0}, {1000, 1000}},
-					coo), c));
+			func[f]((t_point){scale.x * z.x - offset.x, scale.y * z.y - offset.y}, c));
 		}
 	mlx_put_image_to_window(mlx[0], mlx[1], mlx[2], 0, 0);
 }
